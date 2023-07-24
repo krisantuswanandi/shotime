@@ -1,13 +1,32 @@
 <script>
+	import mlbLogo from '../assets/mlb.svg';
+
 	export let data;
 </script>
 
+<svelte:head>
+	<title>Shotime</title>
+</svelte:head>
+
 <div class="flex justify-center items-center flex-col h-full">
-	<h1 class="text-4xl">{data.name}</h1>
-	<h2>{data.team} #{data.number}</h2>
+	<h1 class="text-4xl">
+		<a href="https://www.mlb.com/player/shohei-ohtani-660271" target="_blank">
+			{data.name}
+		</a>
+	</h1>
+	<h2>
+		<a href="https://www.mlb.com/standings/wild-card" target="_blank">{data.team} #{data.number}</a>
+	</h2>
+	<div class="w-8 mt-6">
+		<a href="https://www.mlb.com/player/shohei-ohtani-660271" target="_blank">
+			<img src={mlbLogo} alt="MLB" class="block" />
+		</a>
+	</div>
 	<div class="mt-8">
 		<table class="bg-gray-200">
-			<caption>Hitting</caption>
+			<caption>
+				<a href="https://www.mlb.com/stats/home-runs" target="_blank">Hitting</a>
+			</caption>
 			<thead>
 				<tr>
 					<th class="px-4 py-1">HR</th>
@@ -28,7 +47,9 @@
 	</div>
 	<div class="mt-4">
 		<table class="bg-gray-200">
-			<caption>Pitching</caption>
+			<caption>
+				<a href="https://www.mlb.com/stats/pitching" target="_blank">Pitching</a>
+			</caption>
 			<thead>
 				<tr>
 					<th class="px-4 py-1">W</th>
