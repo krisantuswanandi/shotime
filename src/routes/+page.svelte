@@ -15,24 +15,34 @@
 		</a>
 	</h1>
 	<h2>
-		<a href="https://www.mlb.com/standings/wild-card" target="_blank">{data.team} #{data.number}</a>
+		<a href="https://www.mlb.com/angels/schedule" target="_blank">
+			{data.team} #{data.number}
+		</a>
 	</h2>
 	<div class="w-8 mt-6">
-		<a href="https://www.mlb.com/player/shohei-ohtani-660271" target="_blank">
+		<a href="https://www.mlb.com/standings/wild-card" target="_blank">
 			<img src={mlbLogo} alt="MLB" class="block" />
 		</a>
 	</div>
 	<div class="mt-8">
 		<table class="bg-gray-200">
 			<caption>
-				<a href="https://www.mlb.com/stats/home-runs" target="_blank">Hitting</a>
+				<a href="https://www.mlb.com/stats" target="_blank">Hitting</a>
 			</caption>
 			<thead>
 				<tr>
-					<th class="px-4 py-1">HR</th>
-					<th class="px-4 py-1">RBI</th>
-					<th class="px-4 py-1">SB</th>
-					<th class="px-4 py-1">AVG</th>
+					<th class="px-4 py-1">
+						<a href="https://www.mlb.com/stats/home-runs" target="_blank">HR</a>
+					</th>
+					<th class="px-4 py-1">
+						<a href="https://www.mlb.com/stats/rbi" target="_blank">RBI</a>
+					</th>
+					<th class="px-4 py-1">
+						<a href="https://www.mlb.com/stats/stolen-bases" target="_blank">SB</a>
+					</th>
+					<th class="px-4 py-1">
+						<a href="https://www.mlb.com/stats/batting-average" target="_blank">AVG</a>
+					</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -52,9 +62,15 @@
 			</caption>
 			<thead>
 				<tr>
-					<th class="px-4 py-1">W</th>
-					<th class="px-4 py-1">ERA</th>
-					<th class="px-4 py-1">SO</th>
+					<th class="px-4 py-1">
+						<a href="https://www.mlb.com/stats/pitching/wins" target="_blank">W</a>
+					</th>
+					<th class="px-4 py-1">
+						<a href="https://www.mlb.com/stats/pitching" target="_blank">ERA</a>
+					</th>
+					<th class="px-4 py-1">
+						<a href="https://www.mlb.com/stats/pitching/strikeouts" target="_blank">SO</a>
+					</th>
 				</tr>
 			</thead>
 			<tbody>
