@@ -15,7 +15,7 @@
 		</a>
 	</h1>
 	<h2>
-		<a href="https://www.mlb.com/angels/schedule" target="_blank">
+		<a href="https://www.mlb.com/dodgers/schedule" target="_blank">
 			{data.team} #{data.number}
 		</a>
 	</h2>
