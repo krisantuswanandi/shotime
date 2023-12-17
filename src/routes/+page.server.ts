@@ -1,6 +1,6 @@
 const MLB_API = 'https://statsapi.mlb.com/api/v1';
 const PLAYER_ID = '660271';
-const TEAM_ID = '108';
+const TEAM_ID = '119';
 
 interface Player {
 	fullName: string;
@@ -65,9 +65,7 @@ async function getStats() {
 }
 
 export async function load() {
-	const player = await getPlayer();
-	const team = await getTeam();
-	const stats = await getStats();
+	const [player, team, stats] = await Promise.all([getPlayer(), getTeam(), getStats()]);
 
 	const categorizedStats: CategorizedStats = {
 		hitting: { rbi: 0, avg: '', homeRuns: 0, stolenBases: 0 },
