@@ -68,11 +68,11 @@ export async function load() {
 	const [player, team, stats] = await Promise.all([getPlayer(), getTeam(), getStats()]);
 
 	const categorizedStats: CategorizedStats = {
-		hitting: { rbi: 0, avg: '', homeRuns: 0, stolenBases: 0 },
-		pitching: { wins: 0, strikeOuts: 0, era: '' }
+		hitting: { rbi: 0, avg: '0', homeRuns: 0, stolenBases: 0 },
+		pitching: { wins: 0, strikeOuts: 0, era: '0' }
 	};
 
-	stats.forEach((stat) => {
+	stats?.forEach((stat) => {
 		categorizedStats[stat.group.displayName] = stat.splits[0].stat as PitchingStat & HittingStat;
 	});
 
