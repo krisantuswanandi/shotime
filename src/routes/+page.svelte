@@ -43,6 +43,12 @@
 					<th class="px-4 py-1">
 						<a href="https://www.mlb.com/stats/batting-average" target="_blank">AVG</a>
 					</th>
+					<th class="px-4 py-1">
+						<a href="https://www.mlb.com/stats/slugging-percentage" target="_blank">SLG</a>
+					</th>
+					<th class="px-4 py-1">
+						<a href="https://www.mlb.com/stats" target="_blank">OPS</a>
+					</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -51,6 +57,8 @@
 					<td class="px-4 py-1">{data.stats.hitting.rbi}</td>
 					<td class="px-4 py-1">{data.stats.hitting.stolenBases}</td>
 					<td class="px-4 py-1">{data.stats.hitting.avg}</td>
+					<td class="px-4 py-1">{data.stats.hitting.slg}</td>
+					<td class="px-4 py-1">{data.stats.hitting.ops}</td>
 				</tr>
 			</tbody>
 		</table>

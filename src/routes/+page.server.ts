@@ -27,6 +27,8 @@ interface HittingStat {
 	rbi: number;
 	stolenBases: number;
 	avg: string;
+	ops: string;
+	slg: string;
 }
 
 interface HittingStats {
@@ -68,7 +70,7 @@ export async function load() {
 	const [player, team, stats] = await Promise.all([getPlayer(), getTeam(), getStats()]);
 
 	const categorizedStats: CategorizedStats = {
-		hitting: { rbi: 0, avg: '0', homeRuns: 0, stolenBases: 0 },
+		hitting: { rbi: 0, avg: '0', homeRuns: 0, stolenBases: 0, ops: '0', slg: '0' },
 		pitching: { wins: 0, strikeOuts: 0, era: '0' }
 	};
 
