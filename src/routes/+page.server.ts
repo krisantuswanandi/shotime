@@ -5,6 +5,7 @@ const TEAM_ID = '119';
 interface Player {
 	fullName: string;
 	primaryNumber: string;
+	stats: Stats[];
 }
 
 interface Team {
@@ -44,7 +45,9 @@ interface CategorizedStats {
 }
 
 async function getPlayer() {
-	const response = await fetch(`${MLB_API}/people/${PLAYER_ID}`);
+	const response = await fetch(
+		`${MLB_API}/people/${PLAYER_ID}?hydrate=stats(type=season,group=[hitting,pitching])`
+	);
 	const result = await response.json();
 
 	return result.people[0] as Player;
@@ -57,26 +60,19 @@ async function getTeam() {
 	return result.teams[0] as Team;
 }
 
-async function getStats() {
-	const response = await fetch(
-		`${MLB_API}/people/?personIds=${PLAYER_ID}&hydrate=stats(type=season,group=[hitting,pitching])`
-	);
-	const result = await response.json();
-
-	return result.people[0].stats as Stats[];
-}
-
 export async function load() {
-	const [player, team, stats] = await Promise.all([getPlayer(), getTeam(), getStats()]);
+	const [player, team] = await Promise.all([getPlayer(), getTeam()]);
 
 	const categorizedStats: CategorizedStats = {
 		hitting: { rbi: 0, avg: '0', homeRuns: 0, stolenBases: 0, ops: '0', slg: '0' },
 		pitching: { wins: 0, strikeOuts: 0, era: '0' }
 	};
 
-	stats?.forEach((stat) => {
-		categorizedStats[stat.group.displayName] = stat.splits[0].stat as PitchingStat & HittingStat;
-	});
+	if (player.stats?.length > 0) {
+		player.stats.forEach((stat) => {
+			categorizedStats[stat.group.displayName] = stat.splits[0].stat as PitchingStat & HittingStat;
+		});
+	}
 
 	return {
 		name: player.fullName,
