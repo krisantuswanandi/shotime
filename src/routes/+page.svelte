@@ -15,9 +15,15 @@
 		</a>
 	</h1>
 	<h2>
-		<a href="https://www.mlb.com/dodgers/schedule" target="_blank">
-			{data.team} #{data.number}
-		</a>
+		{#await data.team}
+			Loading...
+		{:then team}
+			<a href="https://www.mlb.com/dodgers/schedule" target="_blank">
+				{team.name} #{data.number}
+			</a>
+		{:catch}
+			#{data.number}
+		{/await}
 	</h2>
 	<div class="w-8 mt-6">
 		<a href="https://www.mlb.com/standings/wild-card" target="_blank">

@@ -61,7 +61,7 @@ async function getTeam() {
 }
 
 export async function load() {
-	const [player, team] = await Promise.all([getPlayer(), getTeam()]);
+	const player = await getPlayer();
 
 	const categorizedStats: CategorizedStats = {
 		hitting: { rbi: 0, avg: '0', homeRuns: 0, stolenBases: 0, ops: '0', slg: '0' },
@@ -77,7 +77,7 @@ export async function load() {
 	return {
 		name: player.fullName,
 		number: player.primaryNumber,
-		team: team.name,
-		stats: categorizedStats
+		stats: categorizedStats,
+		team: getTeam()
 	};
 }
