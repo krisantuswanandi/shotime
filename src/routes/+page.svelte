@@ -18,7 +18,7 @@
 		{#await data.team}
 			Loading...
 		{:then team}
-			<a href="https://www.mlb.com/dodgers/schedule" target="_blank">
+			<a href="https://www.mlb.com/{team.slug}/schedule" target="_blank">
 				{team.name} #{data.number}
 			</a>
 		{:catch}

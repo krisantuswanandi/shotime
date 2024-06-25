@@ -1,15 +1,16 @@
 const MLB_API = 'https://statsapi.mlb.com/api/v1';
 const PLAYER_ID = '660271';
-const TEAM_ID = '119';
 
 interface Player {
 	fullName: string;
 	primaryNumber: string;
+	currentTeam: { id: number };
 	stats: Stats[];
 }
 
 interface Team {
 	name: string;
+	teamName: string;
 }
 
 interface PitchingStat {
@@ -46,18 +47,22 @@ interface CategorizedStats {
 
 async function getPlayer() {
 	const response = await fetch(
-		`${MLB_API}/people/${PLAYER_ID}?hydrate=stats(type=season,group=[hitting,pitching])`
+		`${MLB_API}/people/${PLAYER_ID}?hydrate=stats(type=season,group=[hitting,pitching]),currentTeam`
 	);
 	const result = await response.json();
 
 	return result.people[0] as Player;
 }
 
-async function getTeam() {
-	const response = await fetch(`${MLB_API}/teams/${TEAM_ID}`);
+async function getTeam(id: number) {
+	const response = await fetch(`${MLB_API}/teams/${id}`);
 	const result = await response.json();
+	const team: Team = result.teams[0];
 
-	return result.teams[0] as Team;
+	return {
+		name: team.name,
+		slug: team.teamName.replace(/\W/g, '').toLowerCase()
+	};
 }
 
 export async function load() {
@@ -78,6 +83,6 @@ export async function load() {
 		name: player.fullName,
 		number: player.primaryNumber,
 		stats: categorizedStats,
-		team: getTeam()
+		team: getTeam(player.currentTeam.id)
 	};
 }
