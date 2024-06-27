@@ -63,7 +63,7 @@ async function getTeam(id: number) {
 	await new Promise((res) => {
 		setTimeout(() => {
 			res(true);
-		}, 10000);
+		}, 8000);
 	});
 
 	return {
