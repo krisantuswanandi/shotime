@@ -59,13 +59,6 @@ async function getTeam(id: number) {
 	const result = await response.json();
 	const team: Team = result.teams[0];
 
-	// still sceptical about streaming 🤨
-	await new Promise((res) => {
-		setTimeout(() => {
-			res(true);
-		}, 8000);
-	});
-
 	return {
 		name: team.name,
 		slug: team.teamName.replace(/\W/g, '').toLowerCase()
