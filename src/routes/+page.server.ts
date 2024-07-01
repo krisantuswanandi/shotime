@@ -136,5 +136,6 @@ function fuckTimezone() {
 	console.log('result:', imDone.toISOString());
 	const date = imDone.toISOString().substring(0, 10);
 	const debug = imDone.toISOString().substring(0, 16);
+	console.log('timezone:', Intl.DateTimeFormat().resolvedOptions().timeZone);
 	return { date, timezone, debug };
 }
