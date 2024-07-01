@@ -57,6 +57,9 @@ interface ScheduleDate {
 
 interface ScheduleGame {
 	gamePk: number;
+	status: {
+		statusCode: 'S' | 'I' | 'F';
+	};
 	teams: {
 		away: ScheduleTeam;
 		home: ScheduleTeam;

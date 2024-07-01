@@ -96,19 +96,25 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="mt-10 text-center">
+	<div class="mt-10 flex flex-col items-center">
 		{#await data.games}
 			Loading...
 		{:then games}
 			{#if games.length}
 				<div>Today's games:</div>
 				{#each games as game}
-					<div class="mt-1">
+					<div class="mt-1 relative">
 						<a href="https://www.mlb.com/gameday/{game.gamePk}" target="_blank">
 							<b>{game.teams.home.team.abbreviation}</b>
 							{game.teams.home.score || ''} vs {game.teams.away.score || ''}
 							<b>{game.teams.away.team.abbreviation}</b>
 						</a>
+						{#if game.status.statusCode === 'I'}
+							<div class="absolute top-2 -right-4 w-2 h-2">
+								<div class="absolute w-full h-full bg-red-500 rounded-full animate-ping" />
+								<div class="w-full h-full bg-red-500 rounded-full" />
+							</div>
+						{/if}
 					</div>
 				{/each}
 			{/if}
