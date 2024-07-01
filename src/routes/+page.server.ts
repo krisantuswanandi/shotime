@@ -119,19 +119,14 @@ export async function load() {
 		number: player.primaryNumber,
 		stats: categorizedStats,
 		team: getTeam(player.currentTeam.id),
-		games: getTodaysGames(player.currentTeam.id),
-		debug: fuckTimezone().debug.replace('T', ' ')
+		games: getTodaysGames(player.currentTeam.id)
 	};
 }
 
 function fuckTimezone() {
 	const timezone = 'Asia/Jakarta';
-	const today = new Date();
-	console.log('today:', today.toISOString());
-	const imDone = new Date(today.getTime() + 7 * 60 * 60 * 1000);
-	console.log('result:', imDone.toISOString());
-	const date = imDone.toISOString().substring(0, 10);
-	const debug = imDone.toISOString().substring(0, 16);
-	console.log('timezone:', Intl.DateTimeFormat().resolvedOptions().timeZone);
-	return { date, timezone, debug };
+	const timezoneOffset = 7 * 60 * 60 * 1000;
+	const today = new Date(Date.now() + timezoneOffset);
+	const date = today.toISOString().substring(0, 10);
+	return { date, timezone };
 }

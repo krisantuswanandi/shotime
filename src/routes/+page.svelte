@@ -114,7 +114,6 @@
 			{/if}
 		{/await}
 	</div>
-	<div class="mt-4">Debug: <b>{data.debug}</b></div>
 	<div class="mt-10">
 		<a href="https://github.com/krisantuswanandi/shotime" target="_blank">
 			<img src="https://cdn.svgporn.com/logos/github-icon.svg" alt="github" class="w-6" />
