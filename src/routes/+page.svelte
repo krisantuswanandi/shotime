@@ -96,6 +96,25 @@
 			</tbody>
 		</table>
 	</div>
+	<div class="mt-10 text-center">
+		{#await data.games}
+			Loading...
+		{:then games}
+			{#if games.length}
+				<div>Today's games:</div>
+				{#each games as game}
+					<div class="mt-1">
+						<a href="https://www.mlb.com/gameday/{game.gamePk}" target="_blank">
+							<b>{game.teams.home.team.abbreviation}</b>
+							{game.teams.home.score || ''} vs {game.teams.away.score || ''}
+							<b>{game.teams.away.team.abbreviation}</b>
+						</a>
+					</div>
+				{/each}
+			{/if}
+		{/await}
+	</div>
+	<div class="mt-4">Debug: <b>{data.debug}</b></div>
 	<div class="mt-10">
 		<a href="https://github.com/krisantuswanandi/shotime" target="_blank">
 			<img src="https://cdn.svgporn.com/logos/github-icon.svg" alt="github" class="w-6" />

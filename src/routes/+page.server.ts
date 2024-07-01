@@ -9,8 +9,10 @@ interface Player {
 }
 
 interface Team {
+	id: number;
 	name: string;
 	teamName: string;
+	abbreviation: string;
 }
 
 interface PitchingStat {
@@ -45,6 +47,27 @@ interface CategorizedStats {
 	pitching: PitchingStat;
 }
 
+interface Schedule {
+	dates: ScheduleDate[];
+}
+
+interface ScheduleDate {
+	games: ScheduleGame[];
+}
+
+interface ScheduleGame {
+	gamePk: number;
+	teams: {
+		away: ScheduleTeam;
+		home: ScheduleTeam;
+	};
+}
+
+interface ScheduleTeam {
+	team: Team;
+	score?: number;
+}
+
 async function getPlayer() {
 	const response = await fetch(
 		`${MLB_API}/people/${PLAYER_ID}?hydrate=stats(type=season,group=[hitting,pitching]),currentTeam`
@@ -65,6 +88,18 @@ async function getTeam(id: number) {
 	};
 }
 
+async function getTodaysGames(teamId: number) {
+	const { date, timezone } = fuckTimezone();
+	const response = await fetch(
+		`${MLB_API}/schedule?sportIds=1&startDate=${date}&endDate=${date}&teamId=${teamId}&timeZone=${timezone}&hydrate=team`
+	);
+	const result: Schedule = await response.json();
+
+	if (!result.dates.length) return [];
+
+	return result.dates[0].games;
+}
+
 export async function load() {
 	const player = await getPlayer();
 
@@ -83,6 +118,20 @@ export async function load() {
 		name: player.fullName,
 		number: player.primaryNumber,
 		stats: categorizedStats,
-		team: getTeam(player.currentTeam.id)
+		team: getTeam(player.currentTeam.id),
+		games: getTodaysGames(player.currentTeam.id),
+		debug: fuckTimezone().debug.replace('T', ' ')
 	};
+}
+
+function fuckTimezone() {
+	const timezone = 'Asia/Jakarta';
+	const today = new Date();
+	const localOffset = today.getTimezoneOffset();
+	const wibOffset = 840;
+	const offset = localOffset + wibOffset;
+	const imDone = new Date(today.getTime() + offset * 60000);
+	const date = imDone.toISOString().substring(0, 10);
+	const debug = imDone.toISOString().substring(0, 16);
+	return { date, timezone, debug };
 }
