@@ -127,10 +127,13 @@ export async function load() {
 function fuckTimezone() {
 	const timezone = 'Asia/Jakarta';
 	const today = new Date();
+	console.log('today:', today.toISOString());
 	const localOffset = today.getTimezoneOffset();
+	console.log('offset:', localOffset);
 	const wibOffset = 840;
 	const offset = localOffset + wibOffset;
 	const imDone = new Date(today.getTime() + offset * 60000);
+	console.log('result:', imDone.toISOString());
 	const date = imDone.toISOString().substring(0, 10);
 	const debug = imDone.toISOString().substring(0, 16);
 	return { date, timezone, debug };
