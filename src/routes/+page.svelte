@@ -106,7 +106,7 @@
 					<div class="mt-1 relative">
 						<a href="https://www.mlb.com/gameday/{game.gamePk}" target="_blank">
 							<b>{game.teams.home.team.abbreviation}</b>
-							{game.teams.home.score || ''} vs {game.teams.away.score || ''}
+							{game.teams.home.score ?? ''} vs {game.teams.away.score ?? ''}
 							<b>{game.teams.away.team.abbreviation}</b>
 						</a>
 						{#if game.status.statusCode === 'I'}
