@@ -109,7 +109,7 @@
 							{game.teams.home.score ?? ''} vs {game.teams.away.score ?? ''}
 							<b>{game.teams.away.team.abbreviation}</b>
 						</a>
-						{#if game.status.statusCode === 'I'}
+						{#if game.status.abstractGameState === 'Live'}
 							<div class="absolute top-2 -right-4 w-2 h-2">
 								<div class="absolute w-full h-full bg-red-500 rounded-full animate-ping" />
 								<div class="w-full h-full bg-red-500 rounded-full" />

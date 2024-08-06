@@ -58,7 +58,8 @@ interface ScheduleDate {
 interface ScheduleGame {
 	gamePk: number;
 	status: {
-		statusCode: 'S' | 'I' | 'F';
+		abstractGameState: 'Preview' | 'Live' | 'Final';
+		statusCode: 'S' | 'I' | 'F' | 'PW';
 	};
 	teams: {
 		away: ScheduleTeam;
