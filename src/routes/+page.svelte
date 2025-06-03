@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
 	import mlbLogo from '../assets/mlb.svg';
 
-	export let data;
+	let { data } = $props();
 </script>
 
 <svelte:head>
@@ -111,8 +111,8 @@
 						</a>
 						{#if game.status.abstractGameState === 'Live'}
 							<div class="absolute top-2 -right-4 w-2 h-2">
-								<div class="absolute w-full h-full bg-red-500 rounded-full animate-ping" />
-								<div class="w-full h-full bg-red-500 rounded-full" />
+								<div class="absolute w-full h-full bg-red-500 rounded-full animate-ping"></div>
+								<div class="w-full h-full bg-red-500 rounded-full"></div>
 							</div>
 						{/if}
 					</div>
