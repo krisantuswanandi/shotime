@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Shotime is a SvelteKit web application that displays information about MLB player Shohei Ohtani (#660271). The app fetches real-time data from the MLB API to show player stats, team information, and schedules.
+Shotime is a SvelteKit web application that displays information about MLB players. Originally built to showcase Shohei Ohtani (#660271), the app now supports viewing any MLB player's data through dynamic routes. The app fetches real-time data from the MLB API to show player stats, team information, and schedules.
 
 ## Tech Stack
 
@@ -47,7 +47,8 @@ Shotime is a SvelteKit web application that displays information about MLB playe
 ### API Integration
 
 - MLB API base URL: `https://statsapi.mlb.com/api/v1`
-- Player ID for Shohei Ohtani: `660271`
+- Player ID for Shohei Ohtani: `660271` (default player)
+- Support for any MLB player ID through dynamic routes (`/players/[playerId]`)
 - Always handle API errors gracefully with try/catch
 - Use proper TypeScript interfaces for API responses
 - Cache API responses when appropriate using SvelteKit's built-in caching
@@ -68,8 +69,13 @@ src/
   app.html         # HTML template
   routes/          # SvelteKit routes
     +layout.svelte # Global layout
-    +page.svelte   # Home page component
+    +page.svelte   # Home page component (Shohei Ohtani)
     +page.server.ts # Server-side data fetching
+    players/       # Dynamic player routes
+      [playerId]/  # Dynamic route for any player ID
+        +page.svelte      # Player stats display
+        +page.server.ts   # Player data fetching
+        +error.svelte     # Error handling page
   assets/          # Static assets (images, icons)
 ```
 
@@ -109,6 +115,14 @@ interface Team {
 - Use `+page.server.ts` for fetching MLB API data
 - Return data from `load` functions
 - Handle errors and provide fallbacks
+- Use dynamic parameters with proper TypeScript typing: `{ params: { playerId: string } }`
+
+### Dynamic Routes
+
+- Use `[playerId]` syntax for dynamic player routes
+- Access route parameters via `params.playerId` in load functions
+- Provide proper error handling with `+error.svelte` pages
+- Handle invalid player IDs gracefully
 
 ### Component Props
 
