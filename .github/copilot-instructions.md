@@ -67,6 +67,11 @@ Shotime is a SvelteKit web application that displays information about MLB playe
 src/
   app.css          # Global styles and Tailwind imports
   app.html         # HTML template
+  lib/             # Shared utilities and components
+    types.ts       # Shared TypeScript interfaces
+    utils.ts       # Shared utility functions (API calls, data processing)
+    components/
+      PlayerStats.svelte # Shared player display component
   routes/          # SvelteKit routes
     +layout.svelte # Global layout
     +page.svelte   # Home page component (Shohei Ohtani)
@@ -110,9 +115,17 @@ interface Team {
 
 ## Common Patterns
 
+### Shared Components
+
+- Use shared components in `$lib/components/` to avoid code duplication
+- Import types from `$lib/types.ts` for consistency
+- Use utility functions from `$lib/utils.ts` for common operations
+- Follow the `PlayerStats.svelte` pattern for reusable display components
+
 ### Server-side Data Loading
 
 - Use `+page.server.ts` for fetching MLB API data
+- Import shared utilities from `$lib/utils.ts`
 - Return data from `load` functions
 - Handle errors and provide fallbacks
 - Use dynamic parameters with proper TypeScript typing: `{ params: { playerId: string } }`
